@@ -53,7 +53,7 @@ twoBridgesScenario/
 
 ## Submission
 Upload only the ant.py file to the moodle assignment!
-Deadline is the 7th of April at 11:59 PM.
+Deadline is the 6th of April at 11:59 PM.
 
 ---
 

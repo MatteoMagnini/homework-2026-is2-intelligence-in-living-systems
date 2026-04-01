@@ -90,7 +90,7 @@ After you implement the required methods, collective foraging trails should emer
 ## Success Criteria
 
 - If you complete the TODOs correctly, **the colony should develop clear trails over time, preferring the shorter bridge, even though individual ants only have local and noisy information.**
-- The behaviour should be robust to changes in random seed, number of ants, and map structure.
+- The behaviour should be robust to changes in random seed.
 - The GUI will let you visually inspect the quality of the emergent foraging.
 
 ---

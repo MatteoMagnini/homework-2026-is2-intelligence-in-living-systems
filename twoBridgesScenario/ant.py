@@ -69,7 +69,7 @@ class Ant:
 
     def move(self, world, direction_vec, step_size=1.0):
         """
-        Moves in the direction (with inertia), using step_size.
+        Moves in the direction, using step_size.
         If collision, tries random direction.
         """
         tries = 10
@@ -91,23 +91,10 @@ class Ant:
         """
         for nx, ny in world.nest_map:
             if np.hypot(self.x - nx, self.y - ny) < ANT_VIEW_DIST:
-                vec = np.array([nx - self.x, ny - self.y])
-                norm = np.linalg.norm(vec)
-                if norm > 1e-8:
-                    vec = vec / norm
-                move_vec = INERTIA * self.prev_vec + (1 - INERTIA) * vec
-                move_vec = move_vec / (np.linalg.norm(move_vec) + 1e-8) if np.linalg.norm(move_vec) > 1e-8 else random_direction()
-                self.move(world, move_vec)
-                if random.random() < PHEROMONE_DROP_FOOD:
-                    world.food_pheromones.append(FoodPheromone((self.x, self.y)))
+                # TODO: move the ant towards the nest point (nx, ny) because the ant sees it
                 return True
         if world.home_pheromones:
-            vec = compute_pheromone_vector(self.x, self.y, world.home_pheromones, PHEROMONE_SENSE_RADIUS)
-            move_vec = INERTIA * self.prev_vec + (1 - INERTIA) * vec
-            move_vec = move_vec / (np.linalg.norm(move_vec) + 1e-8) if np.linalg.norm(move_vec) > 1e-8 else random_direction()
-            self.move(world, move_vec)
-            if random.random() < PHEROMONE_DROP_FOOD:
-                world.food_pheromones.append(FoodPheromone((self.x, self.y)))
+            # TODO: move the ant towards the pheromones (use the vectorial sum weighted by the intensity)
             return True
         return False
 
@@ -115,25 +102,14 @@ class Ant:
         """
         Moves towards weighted direction of nearby food pheromones.
         """
-        if world.food_pheromones:
-            vec = compute_pheromone_vector(self.x, self.y, world.food_pheromones, PHEROMONE_SENSE_RADIUS)
-            move_vec = INERTIA * self.prev_vec + (1 - INERTIA) * vec
-            move_vec = move_vec / (np.linalg.norm(move_vec) + 1e-8) if np.linalg.norm(move_vec) > 1e-8 else random_direction()
-            self.move(world, move_vec)
-            if random.random() < PHEROMONE_DROP_HOME:
-                world.home_pheromones.append(HomePheromone((self.x, self.y)))
-            return True
+        # TODO: implement following food pheromones
         return False
 
     def random_walk(self, world):
         """
         Moves randomly, but still weighs previous movement as inertia.
         """
-        if random.random() < PHEROMONE_DROP_HOME:
-            world.home_pheromones.append(HomePheromone((self.x, self.y)))
-        move_vec = INERTIA * self.prev_vec + (1 - INERTIA) * random_direction()
-        move_vec = move_vec / (np.linalg.norm(move_vec) + 1e-8) if np.linalg.norm(move_vec) > 1e-8 else random_direction()
-        self.move(world, move_vec)
+        # TODO: implement random walk
         return True
 
     def step(self, world):

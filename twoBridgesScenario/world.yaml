@@ -20,12 +20,17 @@ obstacles:
     x: 25
     y: 0
     w: 5
-    h: 5
+    h: 3
   - type: rect
     x: 4
     y: 10
     w: 5
     h: 5
+  - type: rect
+    x: 20
+    y: 10
+    w: 8
+    h: 3
 nest:
   - [2.0, 7.0]
 food:

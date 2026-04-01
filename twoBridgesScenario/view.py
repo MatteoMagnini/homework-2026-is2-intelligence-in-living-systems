@@ -1,4 +1,6 @@
 import time
+from multiprocessing.pool import worker
+
 import pygame
 from utils import CELL_SIZE, ANT_RADIUS
 import numpy as np
@@ -93,13 +95,18 @@ class AntColonyView:
         return (r, g, b)
 
     def update(self):
+        # 1. Clear screen (white background)
         self.screen.fill((240, 240, 240))
-        self.draw_obstacles()
-        self.draw_nest()
-        self.draw_food()
+        # 2. Draw the static elements
+        self.draw_obstacles()  # gray
+        self.draw_nest()  # green
+        self.draw_food()  # yellow
+        # 3. Draw pheromones (only those present right now)
         self.draw_pheromones(self.world.food_pheromones, self.food_phero_color)
         self.draw_pheromones(self.world.home_pheromones, self.home_phero_color)
+        # 4. Draw ants
         self.draw_ants()
+        # 5. Flip
         pygame.display.flip()
 
     def run(self, step_fn, fps=FPS):

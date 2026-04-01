@@ -97,7 +97,7 @@ After you implement the required methods, collective foraging trails should emer
 
 ## Hints
 
-- Tune hyperparameters (pheromone drop rates, decay rates, inertia, sense radius, etc.) if needed, but only in `utils.py` and only if instructed by your professor (otherwise leave them as is).
+- Remember to drop pheromones when needed, according to the probabilities defined in the `utils.py` file.
 - If ants do not move after your implementation, debug your movement and perception methods.
 
 ---
